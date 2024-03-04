@@ -3,6 +3,13 @@
 
 @section('content')
 
+    @if($refund = Session::has('password-show'))
+        <div class="alert alert-warning">
+            Berhasil generate password user ({{ Session::get('user')->name }}), <br>
+            <b>Password  : {{ Session::get('user')->password }} </b>,<br>
+            Password hanya akan ditampilan 1 kali !!. copy password agar tidak lupa ya
+        </div>
+    @endif
     <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">
         <span class="tf-icons bx bx-plus-circle"></span>&nbsp; Tambah User
     </a>
@@ -37,14 +44,14 @@
                             @endif
                         </td>
                         <td>
-                            
+
                             <div>
                                 <!-- {!! Form::open(['route' => ['user.destroy', $user->id], 'method' => 'DELETE']) !!} -->
                                 <!-- <button type="submit" class="btn btn-sm btn-info delete-confirm">
                                     <i class="bx bx-user me-1"></i> Lupa password
                                 </button> -->
                                 <!-- {!! Form::close() !!} -->
-                                <a href="#" class="btn btn-sm btn-info delete-confirm">
+                                <a href="{{ route('generate-password', ['id' => $user->id]) }}" onclick="return confirm('Konfirmasi Generate Password . !!')" class="btn btn-sm btn-info">
                                     <i class="bx bx-user me-1"></i> Lupa password
                                 </a>
                             </div>

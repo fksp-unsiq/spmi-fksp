@@ -9,6 +9,7 @@ use App\Http\Requests\UserUpdateRequest;
 use App\Models\Dosen;
 use App\Models\User;
 use App\Services\UserService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -49,12 +50,33 @@ class UserController extends Controller
     {
         $dosenId = $request->input('dosen_id');
         try {
-            $result = $this->userService->add($request, $dosenId);
+            $user = $this->userService->add($request, $dosenId);
             // $this->dispatch(new SendEmailJob($result->email, $result->password));
-            return response()->redirectTo(route('user.index'))->with('success', 'Berhasil membuat user');
+            return redirect()->route('user.create')->with([
+                'success' => 'User Berhasil dibuat',
+                'password-show' => true,
+                'user' => $user
+            ]);
+            // return response()->redirectTo(route('user.index'))->with('success', 'Berhasil membuat user');
         }catch (InvariantException $exception) {
             return redirect()->back()->with('error', 'User gagal ditambahkan, terjadi kesalahan pada server kami')
                 ->withInput($request->all());
+        }
+    }
+
+
+    public function generatePassword($id)
+    {
+        try {
+            $user = $this->userService->generatePassword($id);
+            return redirect()->route('user.index')->with([
+                'success' => 'Password Berhasil dibuat',
+                'password-show' => true,
+                'user' => $user
+            ]);
+        } catch (Exception $e) {
+            dd($e->getMessage());
+            abort(500);
         }
     }
 

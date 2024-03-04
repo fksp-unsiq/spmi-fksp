@@ -42,6 +42,48 @@
 
 {!! Form::close() !!}
 
+@if($refund = Session::has('password-show'))
+    <div class="row d-flex justify-content-center my-4">
+        <div class="col-xl-12">
+            <div class="card mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold">Detail User</h6>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        Password hanya akan ditampilan 1 kali !!. copy password agar tidak lupa ya
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Nama</td>
+                            <td>:</td>
+                            <td>{{ Session::get('user')->name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>:</td>
+                            <td>{{ Session::get('user')->email }}</td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td>:</td>
+                            <td class="font-weight-bold">{{ Session::get('user')->password }}</td>
+                        </tr>
+                        <tr>
+                            <td>Hak Akses</td>
+                            <td>:</td>
+                            <td>
+                                @foreach(Session::get('user')->roles  as $role)
+                                    <span class="badge bg-info">{{ $role->name }} </span>
+                                @endforeach
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 
 @endsection
 

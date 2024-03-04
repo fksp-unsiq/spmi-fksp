@@ -30,8 +30,8 @@ class CreateUserSeeder extends Seeder
 //        $dosenObj = Dosen::factory()->create();
 
         $admin = User::create([
-            'name' => 'Insan Mahmud, SE, M.Si',
-            'email' => 'insanmahmud@unsiq.ac.id',
+            'name' => 'Admin',
+            'email' => 'admin@fksp-unsiq.ac.id',
             'password' => bcrypt('rahasia'),
         ]);
 

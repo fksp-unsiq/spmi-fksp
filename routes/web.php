@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth'])->group(function (){
+    Route::get('/{id}/generate-password', [UserController::class, 'generatePassword'])->name('generate-password');
     Route::resource('/pengumuman', \App\Http\Controllers\PengumumanController::class);
     Route::resource('/penelitian', \App\Http\Controllers\PenelitianController::class)->except(['show']);
     Route::resource('/pengabdian', \App\Http\Controllers\PengabdianController::class)->except(['show']);

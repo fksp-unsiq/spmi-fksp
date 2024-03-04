@@ -15,4 +15,5 @@ interface UserService
     function update(UserUpdateRequest $request, int $id): User;
     function delete(int $id): void;
     public function changePassword(UserChangePasswordRequest $request, $userId): User;
+    function generatePassword(int $id);
 }
