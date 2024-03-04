@@ -30,7 +30,7 @@ class CreateUserSeeder extends Seeder
 //        $dosenObj = Dosen::factory()->create();
 
         $admin = User::create([
-            'name' => 'Admin',
+            'name' => 'Insan Mahmud, SE, M.Si',
             'email' => 'admin@fksp-unsiq.ac.id',
             'password' => bcrypt('rahasia'),
         ]);
@@ -48,7 +48,7 @@ class CreateUserSeeder extends Seeder
         $roleDosen = Role::create(['name' => 'dosen']);
 
 
-        $admin->assignRole([$roleAdmin->id]);
+        $admin->assignRole([$roleAdmin->id, $roleDosen->id]);
 //        $dosen->assignRole([$roleDosen->id]);
 
     }
